@@ -25,3 +25,31 @@ Sample Input:
 Sample Output:
 9
 """
+import sys
+
+r = {}
+s = {}
+w = []
+line = sys.stdin.readline().strip()
+nv, nr = line.split(' ')
+for i in range(int(nr)):
+    line = sys.stdin.readline().strip()
+    w.append(line.strip().split(' '))
+    # s[n] = None
+line = sys.stdin.readline().strip()
+start, stop = line.split(' ')
+
+r[start] = 0
+
+for (n, l) in r.items():
+    for (f, t, ww) in w:
+        if f == n:
+            ll = l + int(ww)
+            if l_min == None:
+                l_min = ll
+                n_min = t
+
+
+    l_min
+    n_min
+    print("n:{} l:{}".format(n, l))
