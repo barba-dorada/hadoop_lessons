@@ -28,7 +28,6 @@ Sample Output:
 import sys
 
 r = {}
-s = {}
 w = []
 line = sys.stdin.readline().strip()
 nv, nr = line.split(' ')
@@ -40,16 +39,36 @@ line = sys.stdin.readline().strip()
 start, stop = line.split(' ')
 
 r[start] = 0
+while len(r) < int(nv):
 
-for (n, l) in r.items():
-    for (f, t, ww) in w:
-        if f == n:
+    l_min = None
+    n_min = None
+
+    for (n, l) in r.items():
+        for (from_node, to_node, ww) in w:
             ll = l + int(ww)
-            if l_min == None:
-                l_min = ll
-                n_min = t
+            if to_node in r:
+                # if r[to_node] > ll:
+                #    # r[to_node] = ll
+                continue
+            if from_node == n:
+                if l_min is None or l_min > ll:
+                    l_min = ll
+                    n_min = to_node
+    if l_min is not None:
+        r[n_min] = l_min
+        if n_min == stop:
+            print(l_min)
+            break
+    print("n:{} l:{}".format(n_min, l_min))
+    print(r)
 
-
-    l_min
-    n_min
-    print("n:{} l:{}".format(n, l))
+else:
+    print(-1)
+# зацикливается , а должно выдать -1?
+"""
+4 2
+3 1 5
+4 2 1
+4 1
+"""
