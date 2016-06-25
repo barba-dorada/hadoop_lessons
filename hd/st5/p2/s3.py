@@ -38,34 +38,45 @@ for i in range(int(nr)):
 line = sys.stdin.readline().strip()
 start, stop = line.split(' ')
 
-r[start] = 0
-while len(r) < int(nv):
 
+def www(n):
+    lll = []
+    for (from_node, to_node, ww) in w:
+        if from_node == n:
+            lll.append((to_node, int(ww)))
+    return lll
+
+
+r[start] = 0
+changes = True
+# while len(r) < int(nv):
+while changes:
     l_min = None
     n_min = None
-
+    changes = False
+    fl = False
     for (n, l) in r.items():
-        for (from_node, to_node, ww) in w:
-            ll = l + int(ww)
+        for (to_node, ww) in www(n):
             if to_node in r:
-                # if r[to_node] > ll:
-                #    # r[to_node] = ll
                 continue
-            if from_node == n:
-                if l_min is None or l_min > ll:
-                    l_min = ll
-                    n_min = to_node
-    if l_min is not None:
-        r[n_min] = l_min
-        if n_min == stop:
-            print(l_min)
-            break
-    print("n:{} l:{}".format(n_min, l_min))
-    print(r)
 
-else:
-    print(-1)
-# зацикливается , а должно выдать -1?
+            ll = l + ww
+            if l_min is None or l_min > ll:
+                l_min = ll
+                n_min = to_node
+
+    if l_min is not None:
+        if r.get(n_min, 1000000) > l_min:
+            r[n_min] = l_min
+            changes = True
+    #print(r)
+
+print(r.get(stop, str(-1)))
+# print("n:{} l:{}".format(n_min, l_min))
+#print(r)
+
+# else:
+# print(-1)  # зацикливается , а должно выдать -1?
 """
 4 2
 3 1 5
