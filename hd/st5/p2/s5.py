@@ -41,3 +41,15 @@ Sample Output:
 10	INF	{}
 
 """
+import sys
+
+for line in sys.stdin:
+    (n, l, nn) = line.strip().split('\t')
+    print(n + '\t' + l + '\t' + nn)
+    if nn != '{}':
+        nnn = nn[1:-1]
+        for n0 in nnn.split(','):
+            ll = l
+            if ll != 'INF':
+                ll = str(int(ll) + 1)
+            print(n0 + '\t' + ll + '\t{}')

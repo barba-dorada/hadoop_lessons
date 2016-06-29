@@ -39,3 +39,21 @@ Sample Output:
 8	2	{}
 9	INF	{}
 """
+import sys
+
+np = None
+wp = None
+nnn = '{}'
+for line in sys.stdin:
+    (n, w, nn) = line.strip().split('\t')
+    if np is None:
+        (np, wp, nnn) = (n, w, nn)
+        continue
+    if np != n:
+        print(np + '\t' + wp + '\t' + nnn)
+        (np, wp, nnn) = (n, w, nn)
+    else:
+        if len(nn) > 2:
+            nnn = nn
+print(np + '\t' + wp + '\t' + nnn)
+
