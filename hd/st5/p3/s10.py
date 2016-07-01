@@ -31,3 +31,35 @@ Sample Output:
 4	0.290	{5}
 5	0.290	{1,2,3}
 """
+
+import sys
+
+N = 5
+a = 0.1
+
+np = None
+rankp = 0.0
+lp = '{}'
+
+
+def getRank(r):
+    return format(a*(1/5)+(1-a)*r, '0.3f')
+
+
+for line in sys.stdin:
+
+    (n, rank, l) = line.strip().split('\t')
+
+    if n != np:
+        if np is not None:
+            print(np + '\t' + getRank(rankp) + '\t' + lp)
+        np = n
+        lp = '{}'
+        rankp = 0.0
+
+    if l != '{}':
+        lp = l
+    else:
+        rankp += float(rank)
+
+print(np + '\t' + getRank(rankp) + '\t' + lp)

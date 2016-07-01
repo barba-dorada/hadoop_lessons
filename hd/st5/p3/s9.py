@@ -30,3 +30,28 @@ Sample Output:
 4	0.300	{5}
 5	0.300	{1,2,3}
 """
+
+import sys
+
+np = None
+rankp = 0.0
+lp = '{}'
+
+for line in sys.stdin:
+
+    (n, rank, l) = line.strip().split('\t')
+
+    if n != np:
+        if np is not None:
+            print(np + '\t' + format(rankp, '0.3f') + '\t' + lp)
+        np = n
+        lp = '{}'
+        rankp = 0.0
+
+    if l != '{}':
+        lp = l
+    else:
+        rankp += float(rank)
+
+print(np + '\t' + format(rankp, '0.3f') + '\t' + lp)
+

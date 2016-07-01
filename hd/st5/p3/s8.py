@@ -29,3 +29,17 @@ Sample Output:
 2	0.067	{}
 3	0.067	{}
 """
+
+import sys
+
+for line in sys.stdin:
+    (n, rank, l) = line.strip().split('\t')
+    print(line.strip())
+    if l == '{}':
+        continue
+
+    ll = l[1:-1].split(',')
+    rank = float(rank) / len(ll)
+    rank = format(rank, '0.3f')
+    for nn in ll:
+        print(nn + '\t' + rank + '\t{}')
